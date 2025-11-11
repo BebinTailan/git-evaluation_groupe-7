@@ -1,0 +1,81 @@
+
+import sys
+
+class Minitrice:
+    def __init__(self):
+        self.interactive = sys.stdin.isatty()
+
+    def parse_line(self, line):
+        line = line.strip()
+        if not line:
+            raise AttributeError("Ligne vide")
+        
+        op = None
+        if '+' in line: op = '+'
+        elif '-' in line: op = '-'
+        elif '*' in line: op = '*'
+        elif '/' in line: op = '/'
+        else:
+            raise ValueError("Opérateur non trouvé")
+            
+        parts = line.split(op, 1)
+        if len(parts) != 2:
+            raise ValueError("Format invalide")
+            
+        num1 = float(parts[0].strip())
+        num2 = float(parts[1].strip())
+        
+        return num1, op, num2
+
+    def calculate(self, num1, op, num2):
+        if op == '+': return num1 + num2
+        if op == '-': return num1 - num2
+        if op == '*': return num1 * num2
+        if op == '/':
+            if num2 == 0:
+                raise ZeroDivisionError()
+            return num1 / num2
+    
+    def format_result(self, result):
+        if result == int(result):
+            return f"{int(result)}"
+        else:
+            return f"{result:.2f}"
+
+    def run(self):
+        try:
+            while True:
+                if self.interactive:
+                    print(">", end=' ', flush=True)
+                
+                line = sys.stdin.readline()
+                if not line:
+                    raise EOFError()
+                
+                try:
+                    num1, op, num2 = self.parse_line(line)
+                    result = self.calculate(num1, op, num2)
+                    print(self.format_result(result))
+                
+                except AttributeError:
+                    continue
+                except ValueError:
+                    print(f"Erreur de syntaxe pour le calcul: \"{line.strip()}\"", file=sys.stderr)
+                    if not self.interactive:
+                        sys.exit(1)
+                except ZeroDivisionError:
+                    print("Division par zéro", file=sys.stderr)
+                    if not self.interactive:
+                        sys.exit(1)
+
+        except EOFError:
+            if self.interactive:
+                print("\nFin des calculs")
+            sys.exit(0)
+        except Exception as e:
+            print(f"Erreur inattendue: {e}", file=sys.stderr)
+            sys.exit(1)
+
+if __name__ == "__main__":
+    app = Minitrice()
+    app.run()
