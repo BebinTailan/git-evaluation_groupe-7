@@ -12,7 +12,6 @@
 
 * [Références/Liens utiles](#référencesliens-utiles)
 
-* [Publication](#publication)
 
 
 
