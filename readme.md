@@ -30,6 +30,9 @@ vous avez besoin de python3 `sudo apt install python3`
 
 ## Exécution
 
+vous devez ouvrir un terminal en mode wsl dans le fichier git-evaluation_groupe-7
+et vous pouvez commencer par la suite vous êtes parti:
+
 echo "3+2" | python3 minitrice
 
 echo "3/0" | python3 minitrice
@@ -42,7 +45,7 @@ python3 generator 5 | python3 minitrice
 ## Remarques
 
 Le projet a été fait en Python 3. La gestion des erreurs et l'execution des programmes était la partie la plus dificile du projet.
-et la creation des programmes etait compliquer dans le sens ou on sait pas par ou commencer
+et la creation des programmes etait compliquer dans le sens ou on sait pas par ou commencer.
 
 
 ## Références/Liens utiles
